@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">StackWifi</string>
+
+    <string name="intro_string">
+        This is an application for The Stack that will collect data about your location and connected wifi networks.
+        Please ensure that you enable the location permission for the app, and keep GPS on so that we can ensure proper data collection.
+        The app will not track your location if you are outside the UCLA campus, and your identity is not tied to any information we collect.
+        Feel free to slack #the-stack if you have any questions. Thank you for participating in this data collection experiment!
+    </string>
+
+    <string name="android_string">
+        \n\nFor Android users:\n
+        • You don\'t need to keep this app open! We collect data in the background and have minimized battery usage, so you can keep using your phone without interruption.\n\n
+        • If you want to stop at any time, just kill this app (or press the stop button in the notification).\n\n
+        • If you want to see the actual data we\'re getting from you, press \"Show Data\" on the bottom (and \"Hide Data\" to come back to this screen)!
+    </string>
+</resources>
