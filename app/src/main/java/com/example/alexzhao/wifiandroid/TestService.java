@@ -298,10 +298,6 @@ public class TestService extends Service {
         }
     }
 
-    /* private void setNewLastLocation(Location location) {
-        lastLocation = location;
-    }*/
-
     private void setLocationTextView(Location location) {
         String output = locString(location);
         if (checkOutsideUCLA(location)) { // is inside UCLA
