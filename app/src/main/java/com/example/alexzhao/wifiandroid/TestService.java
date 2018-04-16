@@ -51,7 +51,6 @@ public class TestService extends Service {
     private static final int TIME_INTERVAL = 1000 * 60 * 1; //1000 * 60 * 5; // get gps location every 5 min
     private static final int DISTANCE = 5; // 5; // set the distance value in meter
     private static final String BASE_URL = "http://flask-env.p8indeshvi.us-west-2.elasticbeanstalk.com/insert";
-    //private static final String BASE_URL = "https://httpbin.org/get?";
     //private static final String BASE_URL_2 = "http://stackwifiandroid.000webhostapp.com/insert.php";
 
     private static final int NOTIFICATION_ID = 0x11111;
@@ -473,43 +472,6 @@ public class TestService extends Service {
     // REQUEST LOGIC
     // *********************************
 
-    /*
-    private void sendToServer() {
-        // do for each wifi
-        for (int i = 0; i < lastNetworks.size(); i++) {
-            String requestURL = Uri.parse(BASE_URL)
-                    .buildUpon()
-                    .appendQueryParameter("name", lastNetworks.get(i).getSSID())
-                    .appendQueryParameter("strength", Integer.toString(lastNetworks.get(i).getLevel()))
-                    .appendQueryParameter("latitude", Double.toString(lastLocation.getLatitude()))
-                    .appendQueryParameter("longitude", Double.toString(lastLocation.getLongitude()))
-                    .appendQueryParameter("elevation", Double.toString(lastLocation.getAltitude()))
-                    .build()
-                    .toString();
-
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
-                    new Response.Listener<String>()
-                    {
-                        @Override
-                        public void onResponse(String response) {
-                            Log.e(TAG, "Request send successful");
-                        }
-                    },
-                    new Response.ErrorListener()
-                    {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.e(TAG, "Request failed: " + error.getLocalizedMessage());
-                        }
-                    }
-            );
-            stringRequest.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-            queue.add(stringRequest);
-    }
-    */
-
-
     private void sendToServer() {
         // do for each wifi
         for (int i = 0; i < lastNetworks.size(); i++) {
@@ -559,42 +521,5 @@ public class TestService extends Service {
                 str.equals("UCLA_WIFI_RES") ||
                 str.equals("UCLA_SECURE_RES"));
     }
-
-    /*
-
-    private void sendToServer() {
-        Log.e(TAG, "sendToServer");
-
-        String requestURL = Uri.parse("https://httpbin.org/get")
-                .buildUpon()
-                .appendQueryParameter("name", lastNetworks.get(0).getSSID())
-                .appendQueryParameter("strength", Integer.toString(lastNetworks.get(0).getLevel()))
-                .appendQueryParameter("latitude", Double.toString(lastLocation.getLatitude()))
-                .appendQueryParameter("longitude", Double.toString(lastLocation.getLongitude()))
-                .appendQueryParameter("elevation", Double.toString(lastLocation.getAltitude()))
-                .build()
-                .toString();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e(TAG, "Request sent to server");
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "Request failed");
-                    }
-                }
-        );
-
-        queue.add(stringRequest);
-    }
-
-    */
 
 }

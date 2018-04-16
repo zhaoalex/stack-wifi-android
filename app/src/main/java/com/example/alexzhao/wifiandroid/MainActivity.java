@@ -168,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
                 button = (Button) findViewById(R.id.button);
                 wifiView = (TextView) findViewById(R.id.wifiView);
                 locView = (TextView) findViewById(R.id.locView);
-                // setLocationTextView(lastLocation);
                 wifiView.setTextSize(16);
                 wifiView.setText(INTRO_STRING);
                 wifiView.setMovementMethod(new ScrollingMovementMethod());
@@ -225,7 +224,6 @@ public class MainActivity extends AppCompatActivity {
                 registerReceiver(mReceiver, mIntentFilter);
 
                 // Begin service
-
                 Intent intent = new Intent(this, TestService.class);
                 startService(intent);
                 bindService(intent, serviceConnection, 0);
