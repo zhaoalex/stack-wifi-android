@@ -48,7 +48,7 @@ import java.util.Objects;
 public class TestService extends Service {
 
     private static final String TAG = "StackWifi";
-    private static final int TIME_INTERVAL = 1000 * 60 * 1; //1000 * 60 * 5; // get gps location every 5 min
+    private static final int TIME_INTERVAL = 1000 * 60 * 1; //1000 * 60 * 5; // get gps location every 1 min
     private static final int DISTANCE = 5; // 5; // set the distance value in meter
     private static final String BASE_URL = "http://flask-env.p8indeshvi.us-west-2.elasticbeanstalk.com/insert";
     //private static final String BASE_URL_2 = "http://stackwifiandroid.000webhostapp.com/insert.php";
@@ -230,7 +230,7 @@ public class TestService extends Service {
                     getWifi = true;
                     isSittingStill = true;
 
-                    handler.postDelayed(this, (1000 * 60 * 5) - 10); // 5 min - 10 sec;
+                    handler.postDelayed(this, (1000 * 60 * 3) - 10); // 3 min - 10 sec;
                 }
             }
         };
@@ -259,7 +259,7 @@ public class TestService extends Service {
     }
 
     public class MyBinder extends Binder {
-        TestService getService() {
+        public TestService getService() {
             return TestService.this;
         }
     }
@@ -312,10 +312,10 @@ public class TestService extends Service {
 
     // Will also update the global isOutsideUCLA var
     private boolean checkOutsideUCLA(Location loc) {
-        if (loc.getLatitude() < 34.058690
-                || loc.getLatitude() > 34.079024
-                || loc.getLongitude() < -118.453508
-                || loc.getLongitude() > -118.438059) {
+        if (loc.getLatitude() < 34.06
+                || loc.getLatitude() > 34.08
+                || loc.getLongitude() < -118.456
+                || loc.getLongitude() > -118.437) {
             isOutsideUCLA = true;
             return true;
         } else {
@@ -361,7 +361,7 @@ public class TestService extends Service {
         // Check whether the new location fix is more or less accurate
         int accuracyDelta = (int) (loc.getAccuracy() - lastLocation.getAccuracy());
         boolean isLessAccurate = accuracyDelta > 10;//0;
-        boolean isMoreAccurate = accuracyDelta < 0;//10;
+        boolean isMoreAccurate = accuracyDelta < 10;//10;
         boolean isSignificantlyLessAccurate = accuracyDelta > 20;
 
         // Check if the old and new location are from the same provider
@@ -472,7 +472,7 @@ public class TestService extends Service {
         // do for each wifi
         for (int i = 0; i < lastNetworks.size(); i++) {
             if (!isNotableNetwork(lastNetworks.get(i).getSSID())) {
-                Log.i(TAG, "Throw away " + lastNetworks.get(i).getSSID());
+                Log.d(TAG, "Throw away " + lastNetworks.get(i).getSSID());
                 continue;
             }
 

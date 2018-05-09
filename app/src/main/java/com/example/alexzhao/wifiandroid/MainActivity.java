@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "StackWifi";
     private static String INTRO_STRING;
 
+    // SharedPreferences sharedPreferences;
+
     boolean showDebug = false;
 
     Button button;
@@ -83,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
         wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
         INTRO_STRING = getString(R.string.intro_string) + getString(R.string.android_string);
+
+        // sharedPreferences = getSharedPreferences("Application", MODE_PRIVATE);
 
         /*
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -229,6 +233,10 @@ public class MainActivity extends AppCompatActivity {
                 bindService(intent, serviceConnection, 0);
                 isBound = true;
                 isServiceOn = true;
+
+                // SharedPreferences.Editor editor = sharedPreferences.edit();
+                // editor.putBoolean("isFirstTime", false);
+                // editor.apply();
             }
         }
     }
@@ -295,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case 111:
                 if (resultCode == RESULT_OK) {
@@ -309,6 +317,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
+    public class StartServiceAtBootReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+                sharedPreferences = getSharedPreferences("Application", MODE_PRIVATE);
+                boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
+
+                if (!isFirstTime) {
+                    loc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                    wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+
+                    if (!loc.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        // showGPSDisabledAlert();
+                        Log.e(TAG, "Startup failed: location");
+                    } else {
+                        if (!wifi.isScanAlwaysAvailable()) {
+                            // showScanningAlert();
+                            Log.e(TAG, "Startup failed: wifi");
+                        } else {
+                            Intent serviceIntent = new Intent(context, TestService.class);
+                            context.startService(serviceIntent);
+                            isServiceOn = true;
+                            Log.e(TAG, "Service started on startup");
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+    */
+
+    /*
+
+
     private void showWifiDisabledAlert() {
         if (alert == null) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
